@@ -1,0 +1,27 @@
+version: "2"
+services:
+
+  dhcpd:
+    container_name: $NAME
+    hostname: local-dhcp
+    restart: "always"
+    image: dhcp
+    command: $IF
+    volumes:
+      - /docker/dhcp/dhcp-event:/usr/local/bin/dhcp-event
+      - /docker/dhcp/lib:/var/lib/dhcp
+      - /docker/dhcp/dhcpd.conf:/etc/dhcp/dhcpd.conf
+      - /docker/dhcp/dhcpd.d:/etc/dhcp/dhcpd.d
+    extra_hosts:
+      - "peer-dhcp:$PEER_IP"
+    networks:
+      macvlan:
+        ipv4_address: $LOCAL_IP
+
+ # define networks
+networks:
+  macvlan:
+    external:
+      name: macvlan
+
+
