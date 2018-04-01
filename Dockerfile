@@ -8,6 +8,8 @@ RUN apt-get update \
 
 RUN touch /var/lib/dhcp/dhcpd.leases
 
+RUN [ "cross-build-end" ]  
+
 VOLUME ["/var/lib/dhcp", "/etc/dhcp"]
 
 ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
