@@ -3,6 +3,7 @@ FROM resin/armv7hf-debian-qemu
 RUN [ "cross-build-start" ]
 
 RUN apt-get update \
+ && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
  && rm -rf /var/lib/apt/lists/*
 
